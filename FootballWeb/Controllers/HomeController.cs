@@ -16,29 +16,26 @@ namespace FootballWeb.Controllers
     {
         private AppDBContext db;
 
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, AppDBContext context)
-
+        public HomeController(AppDBContext context)
         {
-            _logger = logger;
+
             db = context;
         }
 
         public IActionResult Index()
         {
+           // List<Team> tems = db.Teams.ToList();
+
             return View();
         }
-
-        public IActionResult Privacy()
+        public IActionResult PlayerView()
         {
-            return View();
+            List<Team> tems = db.Teams.ToList();
+
+            return View(db.Players.ToList());
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+      
     }
 }

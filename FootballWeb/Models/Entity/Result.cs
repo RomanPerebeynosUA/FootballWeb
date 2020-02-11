@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Common.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace FootballWeb.Models.Entity
 {
-    public class Result
+    public class Result : IEntity
     {
+     
         public int Id { get; set; }
         public string Season { get; set; }
         public int NumberOfgame { get; set; }

@@ -50,12 +50,20 @@ namespace FootballWeb
 
             app.UseAuthorization();
 
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                AppDBContext context = scope.ServiceProvider.GetRequiredService<AppDBContext>();
+
+                SimpleData.Initialize(context);
+            }
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        
         }
     }
 }
