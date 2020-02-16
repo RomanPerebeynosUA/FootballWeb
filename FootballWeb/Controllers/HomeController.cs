@@ -9,26 +9,38 @@ using FootballWeb.Data;
 using FootballWeb.Models.Entity;
 using FootballWeb.Models;
 using Microsoft.EntityFrameworkCore;
+using FootballWeb.Repository.EntityFramework;
+using FootballWeb.ConnectionAPI;
+using System.Net.Http;
 
 namespace FootballWeb.Controllers
 {
     public class HomeController : Controller
     {
         private AppDBContext db;
-
+        private static HttpClient client = new HttpClient();
+   
 
         public HomeController(AppDBContext context)
         {
 
             db = context;
-        }
 
-        public IActionResult Index()
+          
+        }
+        public async Task<IActionResult> Index()
         {
-           // List<Team> tems = db.Teams.ToList();
-
-            return View();
+            Connection.ConnectionToApi(client);
+            
+            string defolt = "players/47";
+            Player player = new Player();
+         //   player = await con.GetPlayerAsync(defolt);
+            player.TeamId = 4;
+            List<Player> players = new List<Player>();
+            players.Add(player);
+            return View(players.ToList());
         }
+
         public IActionResult PlayerView()
         {
             List<Team> tems = db.Teams.ToList();

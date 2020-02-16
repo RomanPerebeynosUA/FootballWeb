@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using FootballWeb.Data;
 using FootballWeb.Service;
@@ -14,8 +16,10 @@ using Microsoft.Extensions.Hosting;
 
 namespace FootballWeb
 {
+
     public class Startup
     {
+        static HttpClient client = new HttpClient();
         public IConfiguration configura { get; }
         public Startup(IConfiguration configuration) => configura = configuration;
      

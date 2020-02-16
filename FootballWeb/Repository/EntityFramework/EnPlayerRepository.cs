@@ -30,7 +30,7 @@ namespace FootballWeb.Repository.EntityFramework
 
         public void Delete(Player item)
         {
-            throw new NotImplementedException();
+            context.Players.Remove(item);    
         }
 
         public Player GetById(int id)
